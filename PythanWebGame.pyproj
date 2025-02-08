@@ -29,9 +29,11 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <Content Include="Athletics.html" />
     <Content Include="game.js" />
     <Content Include="index.html" />
     <Content Include="package.json" />
+    <Content Include="QWOP.min.js" />
     <Content Include="README.md" />
     <Content Include="Styles.css" />
   </ItemGroup>

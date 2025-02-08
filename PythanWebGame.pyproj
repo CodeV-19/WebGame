@@ -29,6 +29,13 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <Content Include="app.publish\.gitattributes" />
+    <Content Include="app.publish\.gitignore" />
+    <Content Include="app.publish\game.js" />
+    <Content Include="app.publish\Index.html" />
+    <Content Include="app.publish\package.json" />
+    <Content Include="app.publish\README.md" />
+    <Content Include="app.publish\Styles.css" />
     <Content Include="public\game.js" />
     <Content Include="public\Index.html" />
     <Content Include="package.json" />
@@ -36,6 +43,7 @@
     <Content Include="public\Styles.css" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app.publish\" />
     <Folder Include="public\" />
     <Folder Include="obj\" />
     <Folder Include="obj\Any CPU\" />

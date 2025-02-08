@@ -4,7 +4,7 @@
   "description": "A simple QWOP game",
   "main": "index.html",
   "scripts": {
-    "start": "live-server",
+    "start": "live-server public",
     "build": "echo 'No build step required'"
   },
   "author": "Your Name",

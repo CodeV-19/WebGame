@@ -2,9 +2,9 @@
   "name": "qwop-game",
   "version": "1.0.0",
   "description": "A simple QWOP game",
-  "main": "public/index.html",
+  "main": "index.html",
   "scripts": {
-    "start": "live-server public",
+    "start": "live-server",
     "build": "echo 'No build step required'"
   },
   "author": "Your Name",

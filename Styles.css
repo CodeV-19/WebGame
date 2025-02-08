@@ -4,9 +4,10 @@
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #ffeb3b; /* 農曆新年風格的背景色 */
 }
 
 canvas {
     border: 1px solid #000;
+    background-color: #ff5722; /* 農曆新年風格的遊戲區域背景色 */
 }

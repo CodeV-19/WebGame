@@ -1,7 +1,7 @@
 {
-  "name": "qwop-game",
+  "name": "snake-game",
   "version": "1.0.0",
-  "description": "A simple QWOP game",
+  "description": "A simple Snake game with Lunar New Year style",
   "main": "index.html",
   "scripts": {
     "start": "live-server public",
@@ -13,3 +13,5 @@
     "live-server": "^1.2.1"
   }
 }
+
+

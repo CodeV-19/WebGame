@@ -1,111 +1,95 @@
-const canvas = document.getElementById('gameCanvas');
+﻿const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-let player = {
-    x: 100,
-    y: 300,
-    width: 50,
-    height: 100,
-    color: 'blue',
-    speed: 2,
-    dx: 0,
-    dy: 0
+const box = 20;
+let snake = [];
+snake[0] = { x: 9 * box, y: 10 * box };
+
+let food = {
+    x: Math.floor(Math.random() * 17 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 3) * box
 };
 
-function drawPlayer() {
-    ctx.fillStyle = player.color;
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-}
+let score = 0;
+let d;
 
-function clear() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+document.addEventListener('keydown', direction);
 
-function newPos() {
-    player.x += player.dx;
-    player.y += player.dy;
-
-    detectWalls();
-}
-
-function detectWalls() {
-    // Left wall
-    if (player.x < 0) {
-        player.x = 0;
-    }
-
-    // Right Wall
-    if (player.x + player.width > canvas.width) {
-        player.x = canvas.width - player.width;
-    }
-
-    // Top wall
-    if (player.y < 0) {
-        player.y = 0;
-    }
-
-    // Bottom wall
-    if (player.y + player.height > canvas.height) {
-        player.y = canvas.height - player.height;
+function direction(event) {
+    if (event.keyCode == 37 && d != 'RIGHT') {
+        d = 'LEFT';
+    } else if (event.keyCode == 38 && d != 'DOWN') {
+        d = 'UP';
+    } else if (event.keyCode == 39 && d != 'LEFT') {
+        d = 'RIGHT';
+    } else if (event.keyCode == 40 && d != 'UP') {
+        d = 'DOWN';
     }
 }
 
-function update() {
-    clear();
-    drawPlayer();
-    newPos();
-
-    requestAnimationFrame(update);
-}
-
-function moveUp() {
-    player.dy = -player.speed;
-}
-
-function moveDown() {
-    player.dy = player.speed;
-}
-
-function moveRight() {
-    player.dx = player.speed;
-}
-
-function moveLeft() {
-    player.dx = -player.speed;
-}
-
-function keyDown(e) {
-    if (e.key === 'ArrowRight' || e.key === 'd') {
-        moveRight();
-    } else if (e.key === 'ArrowLeft' || e.key === 'a') {
-        moveLeft();
-    } else if (e.key === 'ArrowUp' || e.key === 'w') {
-        moveUp();
-    } else if (e.key === 'ArrowDown' || e.key === 's') {
-        moveDown();
+function collision(head, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (head.x == array[i].x && head.y == array[i].y) {
+            return true;
+        }
     }
+    return false;
 }
 
-function keyUp(e) {
+function draw() {
+    ctx.fillStyle = '#ffeb3b'; // 農曆新年風格的背景色
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = i == 0 ? '#d32f2f' : '#f44336'; // 農曆新年風格的蛇身顏色
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+
+        ctx.strokeStyle = '#000';
+        ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+    }
+
+    ctx.fillStyle = '#4caf50'; // 農曆新年風格的食物顏色
+    ctx.fillRect(food.x, food.y, box, box);
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if (d == 'LEFT') snakeX -= box;
+    if (d == 'UP') snakeY -= box;
+    if (d == 'RIGHT') snakeX += box;
+    if (d == 'DOWN') snakeY += box;
+
+    if (snakeX == food.x && snakeY == food.y) {
+        score++;
+        food = {
+            x: Math.floor(Math.random() * 17 + 1) * box,
+            y: Math.floor(Math.random() * 15 + 3) * box
+        };
+    } else {
+        snake.pop();
+    }
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    };
+
     if (
-        e.key === 'ArrowRight' ||
-        e.key === 'ArrowLeft' ||
-        e.key === 'd' ||
-        e.key === 'a'
+        snakeX < 0 ||
+        snakeX >= canvas.width ||
+        snakeY < 0 ||
+        snakeY >= canvas.height ||
+        collision(newHead, snake)
     ) {
-        player.dx = 0;
-    } else if (
-        e.key === 'ArrowUp' ||
-        e.key === 'ArrowDown' ||
-        e.key === 'w' ||
-        e.key === 's'
-    ) {
-        player.dy = 0;
+        clearInterval(game);
     }
+
+    snake.unshift(newHead);
+
+    ctx.fillStyle = '#000';
+    ctx.font = '45px Changa one';
+    ctx.fillText(score, 2 * box, 1.6 * box);
 }
 
-update();
-
-document.addEventListener('keydown', keyDown);
-document.addEventListener('keyup', keyUp);
+let game = setInterval(draw, 100);
 

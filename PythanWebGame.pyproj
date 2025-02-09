@@ -29,19 +29,11 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
-    <Content Include="Athletics.html" />
     <Content Include="game.js" />
     <Content Include="index.html" />
-    <Content Include="lib\howler.js" />
     <Content Include="package.json" />
-    <Content Include="QWOP.min.js" />
     <Content Include="README.md" />
-    <Content Include="scripts\swfobject.js" />
     <Content Include="Styles.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\" />
-    <Folder Include="scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
